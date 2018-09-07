@@ -1,0 +1,37 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "This repo contains all API swagger files and code generator for SOS Online project. This repo is maintained by developers of different services. This repo generates swagger 2.2.3 compatible client code.",
+  "main": "index.js",
+  "dependencies": {
+    "request": "^2.83.0"
+  },
+  "devDependencies": {
+    "@angular/common": "^5.1.0",
+    "@angular/core": "^5.1.0",
+    "@types/node": "^8.0.56",
+    "bluebird": "^3.5.1",
+    "commander": "^2.12.2",
+    "js-yaml": "^3.10.0",
+    "json-refs": "3.0.3",
+    "lodash": "^4.17.4",
+    "multi-file-swagger": "^2.2.0",
+    "shelljs": "^0.7.8",
+    "sw-api-gen": "^1.0.5",
+    "swagger": "0.7.5",
+    "swagger-parser": "^4.0.1",
+    "tempy": "^0.2.1",
+    "typescript": "^2.6.2",
+    "zone.js": "^0.8.18"
+  },
+  "scripts": {
+    "api": "node scripts/api.js",
+    "release": "node scripts/release.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@gitlab.consulting.redhat.com:2222/rhte-api/api.git"
+  },
+  "author": "",
+  "license": "ISC"
+}

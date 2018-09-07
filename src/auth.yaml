@@ -1,0 +1,5 @@
+Bearer:
+  type: apiKey
+  in: header
+  name: Authorization
+  description: "access_token from login. e.g. Authorization: Bearer <access_token>"

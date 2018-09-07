@@ -1,0 +1,73 @@
+swagger: '2.0'
+info:
+  title: Simple Hello World API
+  description: API for Hello World Service.
+  version: '1.0'
+produces:
+  - application/json
+consumes:
+  - application/json
+basePath: /api
+paths:
+  /hello:
+    post:
+      x-swagger-router-controller: helloWorldRoute
+      operationId: helloWorldPost
+      tags:
+        - /hello
+      description: Returns Hello world string via POST.
+      parameters:
+        - name: greeting
+          in: query
+          description: Name of greeting
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful request.
+          schema:
+            $ref: '#/definitions/Hello'
+        default:
+          description: Invalid request.
+          schema:
+            $ref: '#/definitions/Error'
+    get:
+      x-swagger-router-controller: helloWorldRoute
+      operationId: helloWorldGet
+      tags:
+        - /hello
+      description: Returns Hello world string via GET.
+      parameters:
+        - name: greeting
+          in: query
+          description: Name of greeting
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful request.
+          schema:
+            $ref: '#/definitions/Hello'
+        default:
+          description: Invalid request.
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+  Hello:
+    properties:
+      msg:
+        type: string
+    required:
+      - msg
+  Error:
+    type: object
+    required:
+      - message
+    properties:
+      message:
+        type: string
+      extra:
+        type: object
+      code:
+        type: string
+

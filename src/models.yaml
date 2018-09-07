@@ -1,0 +1,17 @@
+Hello:
+    properties:
+      msg:
+        type: string
+    required:
+      - msg
+Error:
+  type: object
+  required:
+    - message
+  properties:
+    message:
+      type: string
+    extra:
+      type: object
+    code:
+      type: string

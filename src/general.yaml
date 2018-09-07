@@ -1,0 +1,11 @@
+produces:
+  - application/json
+consumes:
+  - application/json
+  - application/octet-stream
+securityDefinitions:
+  # X-API-Key: abcdef12345
+  Bearer:
+    $ref: "../auth.yaml#/Bearer"
+security:
+  - Bearer: []
