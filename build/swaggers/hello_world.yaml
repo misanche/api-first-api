@@ -7,6 +7,7 @@ produces:
   - application/json
 consumes:
   - application/json
+host: 'localhost:8001'
 basePath: /api
 paths:
   /hello:
@@ -18,10 +19,11 @@ paths:
       description: Returns Hello world string via POST.
       parameters:
         - name: greeting
-          in: query
+          in: body
           description: Name of greeting
           required: true
-          type: string
+          schema:
+            $ref: '#/definitions/Greeting'
       responses:
         '200':
           description: Successful request.
@@ -38,9 +40,14 @@ paths:
         - /hello
       description: Returns Hello world string via GET.
       parameters:
-        - name: greeting
+        - name: name
           in: query
-          description: Name of greeting
+          description: Name
+          required: true
+          type: string
+        - name: surname
+          in: query
+          description: Surname
           required: true
           type: string
       responses:
@@ -59,6 +66,15 @@ definitions:
         type: string
     required:
       - msg
+  Greeting:
+    properties:
+      name:
+        type: string
+      surname:
+        type: string
+    required:
+      - name
+      - surname
   Error:
     type: object
     required:

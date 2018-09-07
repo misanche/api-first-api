@@ -17,6 +17,7 @@ import { HttpClient, HttpHeaders, HttpParams }               from '@angular/comm
 import { Observable }                                        from 'rxjs/Observable';
 import '../rxjs-operators';
 
+import { Greeting } from '../model/greeting';
 import { Hello } from '../model/hello';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -59,16 +60,23 @@ export class HelloService {
     /**
      * 
      * Returns Hello world string via GET.
-     * @param greeting Name of greeting
+     * @param name Name
+     * @param surname Surname
      */
-    public helloWorldGet(greeting: string): Observable<Hello> {
-        if (greeting === null || greeting === undefined) {
-            throw new Error('Required parameter greeting was null or undefined when calling helloWorldGet.');
+    public helloWorldGet(name: string, surname: string): Observable<Hello> {
+        if (name === null || name === undefined) {
+            throw new Error('Required parameter name was null or undefined when calling helloWorldGet.');
+        }
+        if (surname === null || surname === undefined) {
+            throw new Error('Required parameter surname was null or undefined when calling helloWorldGet.');
         }
 
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (greeting !== undefined) {
-            queryParameters = queryParameters.set('greeting', <any>greeting);
+        if (name !== undefined) {
+            queryParameters = queryParameters.set('name', <any>name);
+        }
+        if (surname !== undefined) {
+            queryParameters = queryParameters.set('surname', <any>surname);
         }
 
         let headers = this.defaultHeaders;
@@ -101,14 +109,9 @@ export class HelloService {
      * Returns Hello world string via POST.
      * @param greeting Name of greeting
      */
-    public helloWorldPost(greeting: string): Observable<Hello> {
+    public helloWorldPost(greeting: Greeting): Observable<Hello> {
         if (greeting === null || greeting === undefined) {
             throw new Error('Required parameter greeting was null or undefined when calling helloWorldPost.');
-        }
-
-        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (greeting !== undefined) {
-            queryParameters = queryParameters.set('greeting', <any>greeting);
         }
 
         let headers = this.defaultHeaders;
@@ -126,11 +129,14 @@ export class HelloService {
         let consumes: string[] = [
             'application/json'
         ];
+        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set("Content-Type", httpContentTypeSelected);
+        }
 
         return this.httpClient.post<any>(`${this.basePath}/hello`,
-            null,
+            greeting,
             {
-                params: queryParameters,
                 headers: headers,
                 withCredentials: this.configuration.withCredentials,
             }

@@ -4,6 +4,15 @@ Hello:
         type: string
     required:
       - msg
+Greeting:
+    properties:
+      name:
+        type: string
+      surname:
+        type: string
+    required:
+      - name
+      - surname
 Error:
   type: object
   required:

@@ -20,10 +20,11 @@ paths:
         Returns Hello world string via POST.
       parameters:
         - name: greeting
-          in: query
+          in: body
           description: Name of greeting
           required: true
-          type: string
+          schema:
+            $ref: '#/definitions/Greeting'
       responses:
         '200':
           description: Successful request.
@@ -41,9 +42,14 @@ paths:
       description: >-
         Returns Hello world string via GET.
       parameters:
-        - name: greeting
+        - name: name
           in: query
-          description: Name of greeting
+          description: Name
+          required: true
+          type: string
+        - name: surname
+          in: query
+          description: Surname
           required: true
           type: string
       responses:
@@ -58,5 +64,7 @@ paths:
 definitions:
   Hello:
     $ref: '../models.yaml#/Hello'
+  Greeting:
+    $ref: '../models.yaml#/Greeting'
   Error:
     $ref: '../models.yaml#/Error'

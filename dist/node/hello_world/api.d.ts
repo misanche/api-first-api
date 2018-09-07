@@ -13,6 +13,21 @@
 import localVarRequest = require('request');
 import http = require('http');
 import Promise = require('bluebird');
+export declare class Greeting {
+    'name': string;
+    'surname': string;
+    static discriminator: any;
+    static attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+    }[];
+}
 export declare class Hello {
     'msg': string;
     static discriminator: any;
@@ -86,9 +101,10 @@ export declare class HelloApi {
     setApiKey(key: HelloApiApiKeys, value: string): void;
     /**
      * Returns Hello world string via GET.
-     * @param greeting Name of greeting
+     * @param name Name
+     * @param surname Surname
      */
-    helloWorldGet(greeting: string): Promise<{
+    helloWorldGet(name: string, surname: string): Promise<{
         response: http.ClientResponse;
         body: Hello;
     }>;
@@ -96,7 +112,7 @@ export declare class HelloApi {
      * Returns Hello world string via POST.
      * @param greeting Name of greeting
      */
-    helloWorldPost(greeting: string): Promise<{
+    helloWorldPost(greeting: Greeting): Promise<{
         response: http.ClientResponse;
         body: Hello;
     }>;

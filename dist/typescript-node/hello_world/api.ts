@@ -136,6 +136,29 @@ class ObjectSerializer {
     }
 }
 
+export class Greeting {
+    'name': string;
+    'surname': string;
+
+    static discriminator = undefined;
+
+    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+        {
+            "name": "name",
+            "baseName": "name",
+            "type": "string"
+        },
+        {
+            "name": "surname",
+            "baseName": "surname",
+            "type": "string"
+        }    ];
+
+    static getAttributeTypeMap() {
+        return Greeting.attributeTypeMap;
+    }
+}
+
 export class Hello {
     'msg': string;
 
@@ -187,6 +210,7 @@ let enumsMap: {[index: string]: any} = {
 }
 
 let typeMap: {[index: string]: any} = {
+    "Greeting": Greeting,
     "Hello": Hello,
     "ModelError": ModelError,
 }
@@ -287,21 +311,31 @@ export class HelloApi {
     }
     /**
      * Returns Hello world string via GET.
-     * @param greeting Name of greeting
+     * @param name Name
+     * @param surname Surname
      */
-    public helloWorldGet (greeting: string) : Promise<{ response: http.ClientResponse; body: Hello;  }> {
+    public helloWorldGet (name: string, surname: string) : Promise<{ response: http.ClientResponse; body: Hello;  }> {
         const localVarPath = this.basePath + '/hello';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
 
-        // verify required parameter 'greeting' is not null or undefined
-        if (greeting === null || greeting === undefined) {
-            throw new Error('Required parameter greeting was null or undefined when calling helloWorldGet.');
+        // verify required parameter 'name' is not null or undefined
+        if (name === null || name === undefined) {
+            throw new Error('Required parameter name was null or undefined when calling helloWorldGet.');
         }
 
-        if (greeting !== undefined) {
-            localVarQueryParameters['greeting'] = ObjectSerializer.serialize(greeting, "string");
+        // verify required parameter 'surname' is not null or undefined
+        if (surname === null || surname === undefined) {
+            throw new Error('Required parameter surname was null or undefined when calling helloWorldGet.');
+        }
+
+        if (name !== undefined) {
+            localVarQueryParameters['name'] = ObjectSerializer.serialize(name, "string");
+        }
+
+        if (surname !== undefined) {
+            localVarQueryParameters['surname'] = ObjectSerializer.serialize(surname, "string");
         }
 
 
@@ -344,7 +378,7 @@ export class HelloApi {
      * Returns Hello world string via POST.
      * @param greeting Name of greeting
      */
-    public helloWorldPost (greeting: string) : Promise<{ response: http.ClientResponse; body: Hello;  }> {
+    public helloWorldPost (greeting: Greeting) : Promise<{ response: http.ClientResponse; body: Hello;  }> {
         const localVarPath = this.basePath + '/hello';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -353,10 +387,6 @@ export class HelloApi {
         // verify required parameter 'greeting' is not null or undefined
         if (greeting === null || greeting === undefined) {
             throw new Error('Required parameter greeting was null or undefined when calling helloWorldPost.');
-        }
-
-        if (greeting !== undefined) {
-            localVarQueryParameters['greeting'] = ObjectSerializer.serialize(greeting, "string");
         }
 
 
@@ -369,6 +399,7 @@ export class HelloApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            body: ObjectSerializer.serialize(greeting, "Greeting")
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);

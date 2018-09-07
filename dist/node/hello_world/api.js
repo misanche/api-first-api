@@ -140,6 +140,28 @@ var ObjectSerializer = /** @class */ (function () {
     };
     return ObjectSerializer;
 }());
+var Greeting = /** @class */ (function () {
+    function Greeting() {
+    }
+    Greeting.getAttributeTypeMap = function () {
+        return Greeting.attributeTypeMap;
+    };
+    Greeting.discriminator = undefined;
+    Greeting.attributeTypeMap = [
+        {
+            "name": "name",
+            "baseName": "name",
+            "type": "string"
+        },
+        {
+            "name": "surname",
+            "baseName": "surname",
+            "type": "string"
+        }
+    ];
+    return Greeting;
+}());
+exports.Greeting = Greeting;
 var Hello = /** @class */ (function () {
     function Hello() {
     }
@@ -186,6 +208,7 @@ var ModelError = /** @class */ (function () {
 exports.ModelError = ModelError;
 var enumsMap = {};
 var typeMap = {
+    "Greeting": Greeting,
     "Hello": Hello,
     "ModelError": ModelError,
 };
@@ -283,19 +306,27 @@ var HelloApi = /** @class */ (function () {
     };
     /**
      * Returns Hello world string via GET.
-     * @param greeting Name of greeting
+     * @param name Name
+     * @param surname Surname
      */
-    HelloApi.prototype.helloWorldGet = function (greeting) {
+    HelloApi.prototype.helloWorldGet = function (name, surname) {
         var localVarPath = this.basePath + '/hello';
         var localVarQueryParameters = {};
         var localVarHeaderParams = Object.assign({}, this.defaultHeaders);
         var localVarFormParams = {};
-        // verify required parameter 'greeting' is not null or undefined
-        if (greeting === null || greeting === undefined) {
-            throw new Error('Required parameter greeting was null or undefined when calling helloWorldGet.');
+        // verify required parameter 'name' is not null or undefined
+        if (name === null || name === undefined) {
+            throw new Error('Required parameter name was null or undefined when calling helloWorldGet.');
         }
-        if (greeting !== undefined) {
-            localVarQueryParameters['greeting'] = ObjectSerializer.serialize(greeting, "string");
+        // verify required parameter 'surname' is not null or undefined
+        if (surname === null || surname === undefined) {
+            throw new Error('Required parameter surname was null or undefined when calling helloWorldGet.');
+        }
+        if (name !== undefined) {
+            localVarQueryParameters['name'] = ObjectSerializer.serialize(name, "string");
+        }
+        if (surname !== undefined) {
+            localVarQueryParameters['surname'] = ObjectSerializer.serialize(surname, "string");
         }
         var localVarUseFormData = false;
         var localVarRequestOptions = {
@@ -345,9 +376,6 @@ var HelloApi = /** @class */ (function () {
         if (greeting === null || greeting === undefined) {
             throw new Error('Required parameter greeting was null or undefined when calling helloWorldPost.');
         }
-        if (greeting !== undefined) {
-            localVarQueryParameters['greeting'] = ObjectSerializer.serialize(greeting, "string");
-        }
         var localVarUseFormData = false;
         var localVarRequestOptions = {
             method: 'POST',
@@ -356,6 +384,7 @@ var HelloApi = /** @class */ (function () {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            body: ObjectSerializer.serialize(greeting, "Greeting")
         };
         this.authentications.default.applyToRequest(localVarRequestOptions);
         if (Object.keys(localVarFormParams).length) {
