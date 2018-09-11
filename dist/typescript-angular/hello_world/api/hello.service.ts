@@ -92,7 +92,8 @@ export class HelloService {
 
         // to determine the Content-Type header
         let consumes: string[] = [
-            'application/json'
+            'application/json',
+            'application/octet-stream'
         ];
 
         return this.httpClient.get<any>(`${this.basePath}/hello`,
@@ -127,7 +128,8 @@ export class HelloService {
 
         // to determine the Content-Type header
         let consumes: string[] = [
-            'application/json'
+            'application/json',
+            'application/octet-stream'
         ];
         let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
         if (httpContentTypeSelected != undefined) {
