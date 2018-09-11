@@ -7,6 +7,7 @@ produces:
   - application/json
 consumes:
   - application/json
+host: 'localhost:8001'
 basePath: /api
 paths:
   /hello:
