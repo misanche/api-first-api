@@ -140,6 +140,205 @@ var ObjectSerializer = /** @class */ (function () {
     };
     return ObjectSerializer;
 }());
+var Exchange = /** @class */ (function () {
+    function Exchange() {
+    }
+    Exchange.getAttributeTypeMap = function () {
+        return Exchange.attributeTypeMap;
+    };
+    Exchange.discriminator = undefined;
+    Exchange.attributeTypeMap = [
+        {
+            "name": "base",
+            "baseName": "base",
+            "type": "string"
+        },
+        {
+            "name": "date",
+            "baseName": "date",
+            "type": "string"
+        },
+        {
+            "name": "rates",
+            "baseName": "rates",
+            "type": "ExchangeRates"
+        }
+    ];
+    return Exchange;
+}());
+exports.Exchange = Exchange;
+var ExchangeRates = /** @class */ (function () {
+    function ExchangeRates() {
+    }
+    ExchangeRates.getAttributeTypeMap = function () {
+        return ExchangeRates.attributeTypeMap;
+    };
+    ExchangeRates.discriminator = undefined;
+    ExchangeRates.attributeTypeMap = [
+        {
+            "name": "aUD",
+            "baseName": "AUD",
+            "type": "string"
+        },
+        {
+            "name": "bGN",
+            "baseName": "BGN",
+            "type": "string"
+        },
+        {
+            "name": "bRL",
+            "baseName": "BRL",
+            "type": "string"
+        },
+        {
+            "name": "cAD",
+            "baseName": "CAD",
+            "type": "string"
+        },
+        {
+            "name": "cHF",
+            "baseName": "CHF",
+            "type": "string"
+        },
+        {
+            "name": "cNY",
+            "baseName": "CNY",
+            "type": "string"
+        },
+        {
+            "name": "cZK",
+            "baseName": "CZK",
+            "type": "string"
+        },
+        {
+            "name": "dKK",
+            "baseName": "DKK",
+            "type": "string"
+        },
+        {
+            "name": "gBP",
+            "baseName": "GBP",
+            "type": "string"
+        },
+        {
+            "name": "hKD",
+            "baseName": "HKD",
+            "type": "string"
+        },
+        {
+            "name": "hRK",
+            "baseName": "HRK",
+            "type": "string"
+        },
+        {
+            "name": "hUF",
+            "baseName": "HUF",
+            "type": "string"
+        },
+        {
+            "name": "iDR",
+            "baseName": "IDR",
+            "type": "string"
+        },
+        {
+            "name": "iLS",
+            "baseName": "ILS",
+            "type": "string"
+        },
+        {
+            "name": "iNR",
+            "baseName": "INR",
+            "type": "string"
+        },
+        {
+            "name": "iSK",
+            "baseName": "ISK",
+            "type": "string"
+        },
+        {
+            "name": "jPY",
+            "baseName": "JPY",
+            "type": "string"
+        },
+        {
+            "name": "kRW",
+            "baseName": "KRW",
+            "type": "string"
+        },
+        {
+            "name": "mXN",
+            "baseName": "MXN",
+            "type": "string"
+        },
+        {
+            "name": "mYR",
+            "baseName": "MYR",
+            "type": "string"
+        },
+        {
+            "name": "nOK",
+            "baseName": "NOK",
+            "type": "string"
+        },
+        {
+            "name": "nZD",
+            "baseName": "NZD",
+            "type": "string"
+        },
+        {
+            "name": "pHP",
+            "baseName": "PHP",
+            "type": "string"
+        },
+        {
+            "name": "pLN",
+            "baseName": "PLN",
+            "type": "string"
+        },
+        {
+            "name": "rON",
+            "baseName": "RON",
+            "type": "string"
+        },
+        {
+            "name": "rUB",
+            "baseName": "RUB",
+            "type": "string"
+        },
+        {
+            "name": "sEK",
+            "baseName": "SEK",
+            "type": "string"
+        },
+        {
+            "name": "sGD",
+            "baseName": "SGD",
+            "type": "string"
+        },
+        {
+            "name": "tHB",
+            "baseName": "THB",
+            "type": "string"
+        },
+        {
+            "name": "tRY",
+            "baseName": "TRY",
+            "type": "string"
+        },
+        {
+            "name": "uSD",
+            "baseName": "USD",
+            "type": "string"
+        },
+        {
+            "name": "zAR",
+            "baseName": "ZAR",
+            "type": "string"
+        }
+    ];
+    return ExchangeRates;
+}());
+exports.ExchangeRates = ExchangeRates;
 var Greeting = /** @class */ (function () {
     function Greeting() {
     }
@@ -208,6 +407,8 @@ var ModelError = /** @class */ (function () {
 exports.ModelError = ModelError;
 var enumsMap = {};
 var typeMap = {
+    "Exchange": Exchange,
+    "ExchangeRates": ExchangeRates,
     "Greeting": Greeting,
     "Hello": Hello,
     "ModelError": ModelError,
@@ -259,6 +460,97 @@ var VoidAuth = /** @class */ (function () {
     return VoidAuth;
 }());
 exports.VoidAuth = VoidAuth;
+var ExchangeApiApiKeys;
+(function (ExchangeApiApiKeys) {
+})(ExchangeApiApiKeys = exports.ExchangeApiApiKeys || (exports.ExchangeApiApiKeys = {}));
+var ExchangeApi = /** @class */ (function () {
+    function ExchangeApi(basePathOrUsername, password, basePath) {
+        this._basePath = defaultBasePath;
+        this.defaultHeaders = {};
+        this._useQuerystring = false;
+        this.authentications = {
+            'default': new VoidAuth(),
+        };
+        if (password) {
+            if (basePath) {
+                this.basePath = basePath;
+            }
+        }
+        else {
+            if (basePathOrUsername) {
+                this.basePath = basePathOrUsername;
+            }
+        }
+    }
+    Object.defineProperty(ExchangeApi.prototype, "useQuerystring", {
+        set: function (value) {
+            this._useQuerystring = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ExchangeApi.prototype, "basePath", {
+        get: function () {
+            return this._basePath;
+        },
+        set: function (basePath) {
+            this._basePath = basePath;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    ExchangeApi.prototype.setDefaultAuthentication = function (auth) {
+        this.authentications.default = auth;
+    };
+    ExchangeApi.prototype.setApiKey = function (key, value) {
+        this.authentications[ExchangeApiApiKeys[key]].apiKey = value;
+    };
+    /**
+     * Get the latest euro exchange rates
+     */
+    ExchangeApi.prototype.exchangeGet = function () {
+        var localVarPath = this.basePath + '/exchange/latest';
+        var localVarQueryParameters = {};
+        var localVarHeaderParams = Object.assign({}, this.defaultHeaders);
+        var localVarFormParams = {};
+        var localVarUseFormData = false;
+        var localVarRequestOptions = {
+            method: 'GET',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+        };
+        this.authentications.default.applyToRequest(localVarRequestOptions);
+        if (Object.keys(localVarFormParams).length) {
+            if (localVarUseFormData) {
+                localVarRequestOptions.formData = localVarFormParams;
+            }
+            else {
+                localVarRequestOptions.form = localVarFormParams;
+            }
+        }
+        return new Promise(function (resolve, reject) {
+            localVarRequest(localVarRequestOptions, function (error, response, body) {
+                if (error) {
+                    reject(error);
+                }
+                else {
+                    body = ObjectSerializer.deserialize(body, "Exchange");
+                    if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                        resolve({ response: response, body: body });
+                    }
+                    else {
+                        reject({ response: response, body: body });
+                    }
+                }
+            });
+        });
+    };
+    return ExchangeApi;
+}());
+exports.ExchangeApi = ExchangeApi;
 var HelloApiApiKeys;
 (function (HelloApiApiKeys) {
 })(HelloApiApiKeys = exports.HelloApiApiKeys || (exports.HelloApiApiKeys = {}));

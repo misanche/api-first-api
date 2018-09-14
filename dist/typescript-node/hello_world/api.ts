@@ -136,6 +136,238 @@ class ObjectSerializer {
     }
 }
 
+export class Exchange {
+    'base': string;
+    'date': string;
+    'rates': ExchangeRates;
+
+    static discriminator = undefined;
+
+    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+        {
+            "name": "base",
+            "baseName": "base",
+            "type": "string"
+        },
+        {
+            "name": "date",
+            "baseName": "date",
+            "type": "string"
+        },
+        {
+            "name": "rates",
+            "baseName": "rates",
+            "type": "ExchangeRates"
+        }    ];
+
+    static getAttributeTypeMap() {
+        return Exchange.attributeTypeMap;
+    }
+}
+
+export class ExchangeRates {
+    'aUD': string;
+    'bGN': string;
+    'bRL': string;
+    'cAD': string;
+    'cHF': string;
+    'cNY': string;
+    'cZK': string;
+    'dKK': string;
+    'gBP': string;
+    'hKD': string;
+    'hRK': string;
+    'hUF': string;
+    'iDR': string;
+    'iLS': string;
+    'iNR': string;
+    'iSK': string;
+    'jPY': string;
+    'kRW': string;
+    'mXN': string;
+    'mYR': string;
+    'nOK': string;
+    'nZD': string;
+    'pHP': string;
+    'pLN': string;
+    'rON': string;
+    'rUB': string;
+    'sEK': string;
+    'sGD': string;
+    'tHB': string;
+    'tRY': string;
+    'uSD': string;
+    'zAR': string;
+
+    static discriminator = undefined;
+
+    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+        {
+            "name": "aUD",
+            "baseName": "AUD",
+            "type": "string"
+        },
+        {
+            "name": "bGN",
+            "baseName": "BGN",
+            "type": "string"
+        },
+        {
+            "name": "bRL",
+            "baseName": "BRL",
+            "type": "string"
+        },
+        {
+            "name": "cAD",
+            "baseName": "CAD",
+            "type": "string"
+        },
+        {
+            "name": "cHF",
+            "baseName": "CHF",
+            "type": "string"
+        },
+        {
+            "name": "cNY",
+            "baseName": "CNY",
+            "type": "string"
+        },
+        {
+            "name": "cZK",
+            "baseName": "CZK",
+            "type": "string"
+        },
+        {
+            "name": "dKK",
+            "baseName": "DKK",
+            "type": "string"
+        },
+        {
+            "name": "gBP",
+            "baseName": "GBP",
+            "type": "string"
+        },
+        {
+            "name": "hKD",
+            "baseName": "HKD",
+            "type": "string"
+        },
+        {
+            "name": "hRK",
+            "baseName": "HRK",
+            "type": "string"
+        },
+        {
+            "name": "hUF",
+            "baseName": "HUF",
+            "type": "string"
+        },
+        {
+            "name": "iDR",
+            "baseName": "IDR",
+            "type": "string"
+        },
+        {
+            "name": "iLS",
+            "baseName": "ILS",
+            "type": "string"
+        },
+        {
+            "name": "iNR",
+            "baseName": "INR",
+            "type": "string"
+        },
+        {
+            "name": "iSK",
+            "baseName": "ISK",
+            "type": "string"
+        },
+        {
+            "name": "jPY",
+            "baseName": "JPY",
+            "type": "string"
+        },
+        {
+            "name": "kRW",
+            "baseName": "KRW",
+            "type": "string"
+        },
+        {
+            "name": "mXN",
+            "baseName": "MXN",
+            "type": "string"
+        },
+        {
+            "name": "mYR",
+            "baseName": "MYR",
+            "type": "string"
+        },
+        {
+            "name": "nOK",
+            "baseName": "NOK",
+            "type": "string"
+        },
+        {
+            "name": "nZD",
+            "baseName": "NZD",
+            "type": "string"
+        },
+        {
+            "name": "pHP",
+            "baseName": "PHP",
+            "type": "string"
+        },
+        {
+            "name": "pLN",
+            "baseName": "PLN",
+            "type": "string"
+        },
+        {
+            "name": "rON",
+            "baseName": "RON",
+            "type": "string"
+        },
+        {
+            "name": "rUB",
+            "baseName": "RUB",
+            "type": "string"
+        },
+        {
+            "name": "sEK",
+            "baseName": "SEK",
+            "type": "string"
+        },
+        {
+            "name": "sGD",
+            "baseName": "SGD",
+            "type": "string"
+        },
+        {
+            "name": "tHB",
+            "baseName": "THB",
+            "type": "string"
+        },
+        {
+            "name": "tRY",
+            "baseName": "TRY",
+            "type": "string"
+        },
+        {
+            "name": "uSD",
+            "baseName": "USD",
+            "type": "string"
+        },
+        {
+            "name": "zAR",
+            "baseName": "ZAR",
+            "type": "string"
+        }    ];
+
+    static getAttributeTypeMap() {
+        return ExchangeRates.attributeTypeMap;
+    }
+}
+
 export class Greeting {
     'name': string;
     'surname': string;
@@ -210,6 +442,8 @@ let enumsMap: {[index: string]: any} = {
 }
 
 let typeMap: {[index: string]: any} = {
+    "Exchange": Exchange,
+    "ExchangeRates": ExchangeRates,
     "Greeting": Greeting,
     "Hello": Hello,
     "ModelError": ModelError,
@@ -265,6 +499,96 @@ export class VoidAuth implements Authentication {
     }
 }
 
+export enum ExchangeApiApiKeys {
+}
+
+export class ExchangeApi {
+    protected _basePath = defaultBasePath;
+    protected defaultHeaders : any = {};
+    protected _useQuerystring : boolean = false;
+
+    protected authentications = {
+        'default': <Authentication>new VoidAuth(),
+    }
+
+    constructor(basePath?: string);
+    constructor(basePathOrUsername: string, password?: string, basePath?: string) {
+        if (password) {
+            if (basePath) {
+                this.basePath = basePath;
+            }
+        } else {
+            if (basePathOrUsername) {
+                this.basePath = basePathOrUsername
+            }
+        }
+    }
+
+    set useQuerystring(value: boolean) {
+        this._useQuerystring = value;
+    }
+
+    set basePath(basePath: string) {
+        this._basePath = basePath;
+    }
+
+    get basePath() {
+        return this._basePath;
+    }
+
+    public setDefaultAuthentication(auth: Authentication) {
+	this.authentications.default = auth;
+    }
+
+    public setApiKey(key: ExchangeApiApiKeys, value: string) {
+        (this.authentications as any)[ExchangeApiApiKeys[key]].apiKey = value;
+    }
+    /**
+     * Get the latest euro exchange rates
+     */
+    public exchangeGet () : Promise<{ response: http.ClientResponse; body: Exchange;  }> {
+        const localVarPath = this.basePath + '/exchange/latest';
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let localVarFormParams: any = {};
+
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'GET',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+        };
+
+        this.authentications.default.applyToRequest(localVarRequestOptions);
+
+        if (Object.keys(localVarFormParams).length) {
+            if (localVarUseFormData) {
+                (<any>localVarRequestOptions).formData = localVarFormParams;
+            } else {
+                localVarRequestOptions.form = localVarFormParams;
+            }
+        }
+        return new Promise<{ response: http.ClientResponse; body: Exchange;  }>((resolve, reject) => {
+            localVarRequest(localVarRequestOptions, (error, response, body) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    body = ObjectSerializer.deserialize(body, "Exchange");
+                    if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                        resolve({ response: response, body: body });
+                    } else {
+                        reject({ response: response, body: body });
+                    }
+                }
+            });
+        });
+    }
+}
 export enum HelloApiApiKeys {
 }
 

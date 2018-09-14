@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Configuration } from './configuration';
 
+import { ExchangeService } from './api/exchange.service';
 import { HelloService } from './api/hello.service';
 
 @NgModule({
@@ -10,6 +11,7 @@ import { HelloService } from './api/hello.service';
   declarations: [],
   exports:      [],
   providers: [
+    ExchangeService,
     HelloService ]
 })
 export class ApiModule {

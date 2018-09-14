@@ -11,6 +11,22 @@ consumes:
 host: 'localhost:8001'
 basePath: /api
 paths:
+  /exchange/latest:
+    get:
+      x-swagger-router-controller: exchangeRoute
+      operationId: exchangeGet
+      tags:
+        - Exchange
+      description: Get the latest euro exchange rates
+      responses:
+        '200':
+          description: successful response
+          schema:
+            $ref: '#/definitions/Exchange'
+        default:
+          description: Invalid request.
+          schema:
+            $ref: '#/definitions/Error'
   /hello:
     post:
       x-swagger-router-controller: helloWorldRoute
@@ -67,5 +83,7 @@ definitions:
     $ref: '../models.yaml#/Hello'
   Greeting:
     $ref: '../models.yaml#/Greeting'
+  Exchange:
+    $ref: '../models.yaml#/Exchange'
   Error:
     $ref: '../models.yaml#/Error'

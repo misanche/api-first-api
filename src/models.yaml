@@ -1,18 +1,96 @@
 Hello:
-    properties:
-      msg:
-        type: string
-    required:
-      - msg
+  properties:
+    msg:
+      type: string
+  required:
+    - msg
 Greeting:
-    properties:
-      name:
-        type: string
-      surname:
-        type: string
-    required:
-      - name
-      - surname
+  properties:
+    name:
+      type: string
+    surname:
+      type: string
+  required:
+    - name
+    - surname
+Exchange:
+  type: object
+  required:
+    - base
+    - date
+    - rates
+  properties:
+    base:
+      type: string
+    date:
+      type: string
+    rates:
+      type: object
+      properties:
+        AUD:
+          type: string
+        BGN:
+          type: string
+        BRL:
+          type: string
+        CAD:
+          type: string
+        CHF:
+          type: string
+        CNY:
+          type: string
+        CZK:
+          type: string
+        DKK:
+          type: string
+        GBP:
+          type: string
+        HKD:
+          type: string
+        HRK:
+          type: string
+        HUF:
+          type: string
+        IDR:
+          type: string
+        ILS:
+          type: string
+        INR:
+          type: string
+        ISK:
+          type: string
+        JPY:
+          type: string
+        KRW:
+          type: string
+        MXN:
+          type: string
+        MYR:
+          type: string
+        NOK:
+          type: string
+        NZD:
+          type: string
+        PHP:
+          type: string
+        PLN:
+          type: string
+        RON:
+          type: string
+        RUB:
+          type: string
+        SEK:
+          type: string
+        SGD:
+          type: string
+        THB:
+          type: string
+        TRY:
+          type: string
+        USD:
+          type: string
+        ZAR:
+          type: string
 Error:
   type: object
   required:

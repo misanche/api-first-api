@@ -11,6 +11,22 @@ consumes:
 host: 'localhost:8001'
 basePath: /api
 paths:
+  /exchange/latest:
+    get:
+      x-swagger-router-controller: exchangeRoute
+      operationId: exchangeGet
+      tags:
+        - Exchange
+      description: Get the latest euro exchange rates
+      responses:
+        '200':
+          description: successful response
+          schema:
+            $ref: '#/definitions/Exchange'
+        default:
+          description: Invalid request.
+          schema:
+            $ref: '#/definitions/Error'
   /hello:
     post:
       x-swagger-router-controller: helloWorldRoute
@@ -76,6 +92,84 @@ definitions:
     required:
       - name
       - surname
+  Exchange:
+    type: object
+    required:
+      - base
+      - date
+      - rates
+    properties:
+      base:
+        type: string
+      date:
+        type: string
+      rates:
+        type: object
+        properties:
+          AUD:
+            type: string
+          BGN:
+            type: string
+          BRL:
+            type: string
+          CAD:
+            type: string
+          CHF:
+            type: string
+          CNY:
+            type: string
+          CZK:
+            type: string
+          DKK:
+            type: string
+          GBP:
+            type: string
+          HKD:
+            type: string
+          HRK:
+            type: string
+          HUF:
+            type: string
+          IDR:
+            type: string
+          ILS:
+            type: string
+          INR:
+            type: string
+          ISK:
+            type: string
+          JPY:
+            type: string
+          KRW:
+            type: string
+          MXN:
+            type: string
+          MYR:
+            type: string
+          NOK:
+            type: string
+          NZD:
+            type: string
+          PHP:
+            type: string
+          PLN:
+            type: string
+          RON:
+            type: string
+          RUB:
+            type: string
+          SEK:
+            type: string
+          SGD:
+            type: string
+          THB:
+            type: string
+          TRY:
+            type: string
+          USD:
+            type: string
+          ZAR:
+            type: string
   Error:
     type: object
     required:

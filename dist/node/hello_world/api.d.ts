@@ -13,6 +13,67 @@
 import localVarRequest = require('request');
 import http = require('http');
 import Promise = require('bluebird');
+export declare class Exchange {
+    'base': string;
+    'date': string;
+    'rates': ExchangeRates;
+    static discriminator: any;
+    static attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+    }[];
+}
+export declare class ExchangeRates {
+    'aUD': string;
+    'bGN': string;
+    'bRL': string;
+    'cAD': string;
+    'cHF': string;
+    'cNY': string;
+    'cZK': string;
+    'dKK': string;
+    'gBP': string;
+    'hKD': string;
+    'hRK': string;
+    'hUF': string;
+    'iDR': string;
+    'iLS': string;
+    'iNR': string;
+    'iSK': string;
+    'jPY': string;
+    'kRW': string;
+    'mXN': string;
+    'mYR': string;
+    'nOK': string;
+    'nZD': string;
+    'pHP': string;
+    'pLN': string;
+    'rON': string;
+    'rUB': string;
+    'sEK': string;
+    'sGD': string;
+    'tHB': string;
+    'tRY': string;
+    'uSD': string;
+    'zAR': string;
+    static discriminator: any;
+    static attributeTypeMap: Array<{
+        name: string;
+        baseName: string;
+        type: string;
+    }>;
+    static getAttributeTypeMap(): {
+        name: string;
+        baseName: string;
+        type: string;
+    }[];
+}
 export declare class Greeting {
     'name': string;
     'surname': string;
@@ -84,6 +145,28 @@ export declare class VoidAuth implements Authentication {
     username: string;
     password: string;
     applyToRequest(_: localVarRequest.Options): void;
+}
+export declare enum ExchangeApiApiKeys {
+}
+export declare class ExchangeApi {
+    protected _basePath: string;
+    protected defaultHeaders: any;
+    protected _useQuerystring: boolean;
+    protected authentications: {
+        'default': Authentication;
+    };
+    constructor(basePath?: string);
+    useQuerystring: boolean;
+    basePath: string;
+    setDefaultAuthentication(auth: Authentication): void;
+    setApiKey(key: ExchangeApiApiKeys, value: string): void;
+    /**
+     * Get the latest euro exchange rates
+     */
+    exchangeGet(): Promise<{
+        response: http.ClientResponse;
+        body: Exchange;
+    }>;
 }
 export declare enum HelloApiApiKeys {
 }
